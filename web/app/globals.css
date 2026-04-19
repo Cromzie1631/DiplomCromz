@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    min-height: 100%;
+  }
+  body {
+    @apply antialiased text-white;
+    background: transparent;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  body:has(.scroll-container) {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  body:has(.scroll-container) html {
+    height: 100%;
+  }
+  body:has(.scroll-container) main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl font-semibold text-white tracking-tight drop-shadow-lg;
+  }
+  .apple-card {
+    @apply bg-transparent rounded-2xl border border-white/20;
+  }
+  .glass-navbar {
+    @apply fixed top-6 left-1/2 -translate-x-1/2 z-50;
+    @apply bg-[rgba(30,30,30,0.35)] backdrop-blur-[16px];
+    @apply border border-white/10 rounded-2xl;
+    @apply shadow-[0_8px_40px_rgba(0,0,0,0.35)];
+    @apply px-6 py-3;
+    @apply max-w-5xl w-[calc(100%-2rem)];
+  }
+  .glass-card {
+    @apply bg-[rgba(30,30,30,0.35)] backdrop-blur-[16px];
+    @apply border border-white/10 rounded-2xl;
+    @apply shadow-[0_8px_40px_rgba(0,0,0,0.35)];
+    @apply p-8 md:p-12;
+  }
+  .glass-badge {
+    @apply inline-flex items-center px-4 py-2;
+    @apply bg-[rgba(30,30,30,0.4)] backdrop-blur-[12px];
+    @apply border border-white/10 rounded-full;
+    @apply text-sm text-white/90;
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+  }
+  .glass-btn {
+    @apply inline-flex items-center justify-center;
+    @apply px-8 py-4 rounded-full;
+    @apply bg-white/10 backdrop-blur-[12px];
+    @apply border border-white/20;
+    @apply text-white font-medium;
+    @apply hover:bg-white/15 hover:border-white/30;
+    @apply transition-all duration-200;
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center;
+    @apply px-8 py-4 rounded-full;
+    @apply bg-white text-neutral-900;
+    @apply font-semibold;
+    @apply hover:bg-white/90;
+    @apply transition-all duration-200;
+    @apply shadow-lg;
+    @apply cursor-pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center;
+    @apply px-8 py-4 rounded-full;
+    @apply bg-[rgba(30,30,30,0.4)] backdrop-blur-[12px];
+    @apply border border-white/20;
+    @apply text-white font-semibold;
+    @apply hover:bg-[rgba(30,30,30,0.5)] hover:border-white/30;
+    @apply transition-all duration-200;
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+    @apply cursor-pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .apple-btn {
+    @apply inline-flex items-center justify-center rounded-full bg-white text-neutral-900 font-medium hover:bg-white/90 transition-opacity shadow-lg;
+  }
+  .apple-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-white/30 bg-black/20 backdrop-blur-md text-white font-medium hover:bg-black/30 transition-colors;
+  }
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-items: center;
+  }
+  .module-card {
+    width: 340px;
+    height: 180px;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+  .module-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  .module-inner.flipped {
+    transform: rotateY(180deg);
+  }
+  .module-front,
+  .module-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+  }
+  .module-back {
+    transform: rotateY(180deg);
+    padding: 20px;
+    text-align: center;
+  }
+  .usage-card {
+    @apply bg-[rgba(255,255,255,0.04)] backdrop-blur-[10px];
+    @apply border border-white/20 rounded-2xl;
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+  .scroll-container {
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-padding-top: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .section {
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* Стилизация скроллбара для WebKit (Chrome, Safari, Opera) */
+  .scroll-container::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scroll-container::-webkit-scrollbar-track,
+  body::-webkit-scrollbar-track {
+    background: transparent; /* Прозрачный фон */
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3); /* Полупрозрачный белый ползунок */
+    border-radius: 4px;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb:hover,
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Ползунок становится ярче при наведении */
+  }
+
+  /* Стилизация скроллбара для Firefox */
+  .scroll-container,
+  body {
+    scrollbar-width: thin; /* "auto" или "thin" */
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* thumb track */
+  }
+
+  /* Прокручиваемые блоки внутри секций */
+  .scrollable-content {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+  }
+
+  .scrollable-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollable-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollable-content::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  .scrollable-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .scrollable-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+}
